@@ -8,6 +8,7 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import random
 import numpy as np
+import math
 
 def hook(module, input, output):
     features.append(input)
@@ -36,8 +37,8 @@ class Net(nn.Module):
         return x
 def train():
     net = Net()
-    learningRate=1e-2
-    optimizer = torch.optim.Adam(net.parameters(), learningRate)
+    learningRate=0.5
+    optimizer = torch.optim.SGD(net.parameters(), learningRate)
     loss_func = torch.nn.MSELoss()
     y_ = []
     y_test = []
@@ -52,12 +53,18 @@ def train():
         print("结果",prediction)
         loss = loss_func(prediction, label)
         print("loss",loss)
+        
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         for name in net.state_dict():
             print(name)
             print(net.state_dict()[name])
+        
     return
+def sigmoid(x):
+    return 1/(1+math.exp(-x))
+def cal():
+    return 0
 if __name__ == "__main__":
     train()
