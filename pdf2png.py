@@ -35,7 +35,7 @@ def c():
         img = cv2.imread(ori_path+num[i])  # 读取
         print(i)
         resize = cv2.resize(img, (1920, 2716))  # resize
-        cv2.imwrite(save_path+str(i)+'.bmp',resize)  # 保存
+        cv2.imwrite(save_path+str(i+1)+'.bmp',resize)  # 保存
 
 
 if __name__ == "__main__":
