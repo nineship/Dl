@@ -1,6 +1,6 @@
 import datetime
 import os
-
+import cv2
 import fitz  # fitz就是pip install PyMuPDF
 
 
@@ -26,6 +26,16 @@ def pyMuPDF_fitz(pdfPath, imagePath):
 
     endTime_pdf2img = datetime.datetime.now()  # 结束时间
     print('pdf2img时间=', (endTime_pdf2img - startTime_pdf2img).seconds)
+def c():
+    num = os.listdir("./imgs/") # num为list类型，存储着每张图片的名字
+    print('共{}张图片'.format(len(num))) # 计算机当前目录有几张图片
+    ori_path = "./imgs/"
+    save_path = "./save/"
+    for i in range(len(num)):
+        img = cv2.imread(ori_path+num[i])  # 读取
+        print(i)
+        resize = cv2.resize(img, (1920, 2716))  # resize
+        cv2.imwrite(save_path+str(i)+'.bmp',resize)  # 保存
 
 
 if __name__ == "__main__":
@@ -34,4 +44,4 @@ if __name__ == "__main__":
     # 2、需要储存图片的目录
     imagePath = './imgs'
     pyMuPDF_fitz(pdfPath, imagePath)
-
+    c()
